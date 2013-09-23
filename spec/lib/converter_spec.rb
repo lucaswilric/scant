@@ -26,4 +26,12 @@ describe Converter do
       conv.pnm_to_ps('bar.pnm', 'bar.ps')
     end
   end
+
+  describe :ps_to_pdf do
+    it 'runs `ps2pdf`' do
+      factory.should_receive(:pvc).with('ps2pdf', 'bar.ps', 'bar.pdf').and_return(pvc)
+
+      conv.ps_to_pdf('bar.ps', 'bar.pdf')
+    end
+  end
 end
