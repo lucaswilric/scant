@@ -18,7 +18,7 @@ class Scanner
   #
 
   Defaults = {
-    format: :jpeg,
+    format: :jpg,
     detail: :medium,
     mode: :color
   }
@@ -30,7 +30,7 @@ class Scanner
   def scan(name, options = {})
     options = Defaults.merge options
 
-    @pvcf = options.delete(:pvc_factory) || PVCFactory.new
+    @factory = options.delete(:factory) || Factory.new
 
     args = get_args(options)
 
@@ -48,11 +48,11 @@ class Scanner
     return if :tiff == format
 
     method = case format
-      when :jpeg then :tiff_to_jpeg
+      when :jpeg, :jpg then :tiff_to_jpeg
       when :pdf then :pnm_to_pdf
     end
 
-    Converter.new.public_send(method, from_filename, to_filename)
+    @factory.converter.public_send(method, from_filename, to_filename)
   end
 
   def get_args(options)
@@ -91,7 +91,7 @@ class Scanner
       "-y", "1000"]
 
     File.open(filename, 'w+') do |f|
-      f.write(@pvcf.get_pvc(command, *params).run.stdout)
+      f.write(@factory.pvc(command, *params).run.stdout)
     end
   end
 end
