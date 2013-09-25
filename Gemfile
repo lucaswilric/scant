@@ -20,6 +20,7 @@ end
 gem 'jquery-rails'
 gem 'pry'
 gem 'devise'
+gem 'omniauth-google-oauth2'
 gem 'pvc'
 
 gem 'haml-rails'

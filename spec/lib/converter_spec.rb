@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Converter do
   let(:factory) { Factory.new }
   let(:conv) { Converter.new(factory) }
-  let(:pvc) { PVC.new('ruby', '-e', 'puts "foo bar baz"') }
+  let(:pvc) { PVC.new('ruby', '-e', '1') }
 
   after :each do
     Dir.glob('bar.*').each do |f|
