@@ -1,0 +1,19 @@
+%h1 Listing documents
+
+%table
+  %tr
+    %th File name
+    %th
+    %th
+    %th
+
+  - @documents.each do |document|
+    %tr
+      %td= document.file_name
+      %td= link_to 'Show', document
+      %td= link_to 'Edit', edit_document_path(document)
+      %td= link_to 'Destroy', document, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Document', new_document_path
