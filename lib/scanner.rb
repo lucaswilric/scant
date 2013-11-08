@@ -39,6 +39,8 @@ class Scanner
     perform_scan(filename, args)
 
     convert(options[:format], temp_filename, filename)
+
+    filename
   end
 
   private

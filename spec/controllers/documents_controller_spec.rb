@@ -64,6 +64,15 @@ describe DocumentsController do
   end
 
   describe "POST create" do
+    let(:factory) { Factory.new }
+    let(:scanner) { Scanner.new('test_scanner') }
+
+    before :each do
+      scanner.stub(:scan) {'dummy_file'}
+      factory.stub(:scanner) { scanner }
+      ApplicationController.any_instance.stub(:factory).and_return(factory)
+    end
+
     describe "with valid params" do
       it "creates a new Document" do
         expect {

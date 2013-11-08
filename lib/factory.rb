@@ -6,4 +6,8 @@ class Factory
   def converter(*args)
     Converter.new(self, *args)
   end
+
+  def scanner
+    Scanner.new(Settings['SCANNER_NAME'])
+  end
 end

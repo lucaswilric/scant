@@ -1,4 +1,6 @@
 class DocumentsController < ApplicationController
+  include DocumentsHelper
+
   before_filter :check_user
 
   # GET /documents
@@ -44,7 +46,9 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(params[:document])
+    filename = factory.scanner.scan(get_scan_name, {})
+
+    @document = Document.new(file_name: filename)
     @document.user = current_user
 
     respond_to do |format|

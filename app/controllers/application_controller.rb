@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
+
+  def factory
+    @factory ||= Factory.new
+  end
 end
