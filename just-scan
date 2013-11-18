@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo Scanning...
+
+scanimage -d 'plustek:libusb:001:007' --mode=Color --format=ps --resolution=200 -l 0 -t 0 -x 767 -y 511 -p > temp.pnm
+
+echo Converting to PDF...
+
+pnmtops temp.pnm > temp.ps
+ps2pdf temp.ps temp.pdf
+
+rm temp.pnm temp.ps
+
+echo Done.
