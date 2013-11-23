@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  username: postgres
+  database: scant_test
