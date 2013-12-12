@@ -1,3 +1,5 @@
+require 'fileutils'
+
 Settings = AppConfiguration.new 'config/defaults.yml'
 
-Dir.mkdir(Settings.doc_root)
+FileUtils.mkdir_p(Settings.doc_root)
