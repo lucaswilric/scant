@@ -33,12 +33,17 @@ class Scanner
     @factory = options.delete(:factory) || Factory.new
 
     args = get_args(options)
+    
+    temp_filename, filename = names(name, args, options)
 
-    temp_filename = "#{ name }.#{ args[:initial_format] }"
-    filename = "#{ name }.#{ options[:format] }"
-    perform_scan(filename, args)
+    if Rails.env.development?
+      # We probably don't have an actual scanner here
+      File.open(filename, 'w') {|f| f.write "There's a file here now." }
+    else
+      perform_scan(temp_filename, args)
 
-    convert(options[:format], temp_filename, filename)
+      convert(options[:format], temp_filename, filename)
+    end
 
     filename
   end
@@ -55,6 +60,13 @@ class Scanner
     end
 
     @factory.converter.public_send(method, from_filename, to_filename)
+  end
+
+  def names(name, args, options)
+    [
+      "#{ name }.#{ args[:initial_format] }",
+      "#{ name }.#{ options[:format] }"
+    ]
   end
 
   def get_args(options)
