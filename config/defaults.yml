@@ -1,2 +1,2 @@
-SCANNER_NAME: test_scanner
-
+scanner_name: test_scanner
+doc_root: tmp/documents

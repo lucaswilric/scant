@@ -8,6 +8,6 @@ class Factory
   end
 
   def scanner
-    Scanner.new(Settings['SCANNER_NAME'])
+    Scanner.new(Settings.scanner_name)
   end
 end
