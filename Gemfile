@@ -22,6 +22,7 @@ gem 'pry'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'pvc'
+gem 'app_configuration'
 
 gem 'haml-rails'
 gem 'simple_form'
