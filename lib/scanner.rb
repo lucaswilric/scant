@@ -34,7 +34,7 @@ class Scanner
 
     args = get_args(options)
     
-    temp_filename, filename = names(name, args, options)
+    temp_filename, filename = get_names(name, args, options)
 
     if Rails.env.development?
       # We probably don't have an actual scanner here
@@ -62,11 +62,11 @@ class Scanner
     @factory.converter.public_send(method, from_filename, to_filename)
   end
 
-  def names(name, args, options)
+  def get_names(name, args, options)
     [
       "#{ name }.#{ args[:initial_format] }",
       "#{ name }.#{ options[:format] }"
-    ]
+    ].map {|n| File.join Settings.doc_root, n }
   end
 
   def get_args(options)
