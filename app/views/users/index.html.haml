@@ -1,2 +1,14 @@
-%h1 Users#index
-%p Find me in app/views/users/index.html.haml
+%h1 Users
+%table
+  %tr
+    %th
+      Name
+    %th
+      Email
+    %th
+  - @users.each do |user|
+    %tr
+      %td= user.name
+      %td= user.email
+      %td= link_to 'Show', user
+      %td= link_to 'Edit', edit_user_path(user)

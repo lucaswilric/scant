@@ -1,2 +1,7 @@
-%h1 Users#edit
-%p Find me in app/views/users/edit.html.haml
+%h1= @user.name
+
+= render 'form'
+
+= link_to 'Show', @user
+\|
+= link_to 'Back', users_path

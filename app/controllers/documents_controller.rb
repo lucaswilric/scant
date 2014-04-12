@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   include DocumentsHelper
+  include DropboxHelper
 
   before_filter :check_user
 
@@ -51,8 +52,11 @@ class DocumentsController < ApplicationController
     @document = Document.new(file_name: filename)
     @document.user = current_user
 
+    #dropbox_ok = (not params[:save_to_dropbox]) || save_to_dropbox(filename)
+    dropbox_ok = save_to_dropbox(filename, current_user)
+
     respond_to do |format|
-      if @document.save
+      if @document.save and dropbox_ok
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render json: @document, status: :created, location: @document }
       else

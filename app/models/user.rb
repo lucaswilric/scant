@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def dropbox?
+    dropbox_user_id.present?
+  end
 end

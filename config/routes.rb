@@ -10,6 +10,9 @@ Scant::Application.routes.draw do
 
   resources :users
 
+  match 'dropbox/auth' => 'dropbox#auth', :as => :dropbox_auth
+  match 'dropbox/auth_finish' => 'dropbox#auth_finish', :as => :dropbox_auth_finish
+
   get "home/index"
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
