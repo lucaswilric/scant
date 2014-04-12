@@ -7,7 +7,8 @@
           %li= msg
 
   .field
-    = f.label :file_name
-    = f.text_field :file_name
+    = label_tag :send_to_dropbox, 'Send to Dropbox'
+    = check_box_tag :send_to_dropbox
+
   .actions
-    = f.submit 'Save'
+    = f.submit 'Scan'

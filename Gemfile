@@ -30,3 +30,4 @@ gem 'simple_form'
 gem 'rspec-rails'
 gem 'fuubar'
 
+gem 'dropbox-sdk'

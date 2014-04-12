@@ -1,2 +1,16 @@
-%h1 Users#show
-%p Find me in app/views/users/show.html.haml
+%p#notice= notice
+
+%h1
+  = @user.name
+
+%p
+  %b Email:
+  = @user.email
+
+%p
+  %b Linked to Dropbox:
+    = @user.dropbox? ? 'Yes' : 'No'
+
+= link_to 'Edit', edit_user_path(@user)
+\|
+= link_to 'Back', users_path
