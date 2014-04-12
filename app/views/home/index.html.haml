@@ -1,3 +1,13 @@
 %h1 Scant
 .login
-  = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)
+  .login_form
+    = form_tag session_path(:user) do
+      = text_field_tag 'user[email]'
+      = password_field_tag 'user[password]'
+      = check_box_tag 'user[remember_me]'
+      = label_tag 'user[remember_me]', 'Remember me'
+      %button Sign in
+      = link_to "Forgot your password?", new_password_path(:user)
+  .google_oauth2
+    Or
+    = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)

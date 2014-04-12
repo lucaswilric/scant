@@ -1,6 +1,14 @@
 Scant::Application.routes.draw do
 
+  get "users/index"
+
+  get "users/edit"
+
+  get "users/show"
+
   resources :documents
+
+  resources :users
 
   get "home/index"
 
