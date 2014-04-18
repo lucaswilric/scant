@@ -9,7 +9,7 @@
 
 %p
   %b Linked to Dropbox:
-    = @user.dropbox? ? 'Yes' : 'No'
+  %span.linked_to_dropbox= @user.dropbox? ? 'Yes' : 'No'
 
 = link_to 'Edit', edit_user_path(@user)
 \|

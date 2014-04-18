@@ -10,9 +10,6 @@ module DropboxHelper
 
     client = DropboxClient.new(user.dropbox_access_token)
 
-    # Instead of `content`, we might put `open('myfile.pdf')`
-    response = client.put_file("/#{filename.sub(Settings.doc_root, '')}", open(filename))
-
-    #response['path'] == filename
+    client.put_file("/#{filename.sub(Settings.doc_root, '')}", open(filename))
   end
 end

@@ -11,5 +11,9 @@ require 'spec_helper'
 #   end
 # end
 describe DocumentsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'get_scan_name' do
+    it 'returns the formatted current time' do
+      # Do something with TimeCop
+    end
+  end
 end
