@@ -8,15 +8,15 @@ Scant::Application.routes.draw do
 
   resources :documents
 
-  resources :users
-
   match 'dropbox/auth' => 'dropbox#auth', :as => :dropbox_auth
   match 'dropbox/auth_finish' => 'dropbox#auth_finish', :as => :dropbox_auth_finish
   match 'dropbox/unauthorise' => 'dropbox#unauthorise', :as => :dropbox_unauthorise
 
   get "home/index"
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }, path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+
+  resources :users
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

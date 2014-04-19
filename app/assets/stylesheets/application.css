@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+input[type=checkbox] {
+  float: left;
+  margin-right: 5px !important;
+}
