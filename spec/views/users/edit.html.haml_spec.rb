@@ -15,4 +15,19 @@ describe "users/edit.html.haml" do
     end
   end
 
+  it "says the user is linked to Dropbox" do
+    @user.dropbox_user_id = 'dummy'
+
+    render
+
+    rendered.should match /Linked to Dropbox/
+  end
+
+  it "says the user is not linked to Dropbox" do
+    @user.dropbox_user_id = nil
+
+    render
+
+    rendered.should match /Not linked to Dropbox/
+  end
 end

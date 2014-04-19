@@ -4,10 +4,12 @@ describe "documents/index" do
   before(:each) do
     assign(:documents, [
       stub_model(Document,
-        :file_name => "File Name"
+        :file_name => "File Name",
+        :created_at => Time.now
       ),
       stub_model(Document,
-        :file_name => "File Name"
+        :file_name => "File Name",
+        :created_at => Time.now
       )
     ])
   end

@@ -12,6 +12,7 @@ Scant::Application.routes.draw do
 
   match 'dropbox/auth' => 'dropbox#auth', :as => :dropbox_auth
   match 'dropbox/auth_finish' => 'dropbox#auth_finish', :as => :dropbox_auth_finish
+  match 'dropbox/unauthorise' => 'dropbox#unauthorise', :as => :dropbox_unauthorise
 
   get "home/index"
 

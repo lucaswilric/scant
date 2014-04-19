@@ -1,14 +1,8 @@
-= form_for @document do |f|
-  - if @document.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@document.errors.count, "error")} prohibited this document from being saved:"
-      %ul
-        - @document.errors.full_messages.each do |msg|
-          %li= msg
+- sidebar ||= false
+- document = sidebar ? @sidebar_document : @document
 
-  .field
-    = label_tag :send_to_dropbox, 'Send to Dropbox'
-    = check_box_tag :send_to_dropbox
-
-  .actions
-    = f.submit 'Scan'
+= simple_form_for document, :html => { :class => 'form-horizontal' } do |f|
+  = check_box_tag :save_to_dropbox
+  = label_tag :save_to_dropbox, 'Save to Dropbox'
+  .form-actions
+    = f.button :submit, { :class => 'btn-primary', value: 'Scan now' }

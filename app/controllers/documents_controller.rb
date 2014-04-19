@@ -52,7 +52,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(file_name: filename)
     @document.user = current_user
 
-    dropbox_ok = (not params[:save_to_dropbox]) || save_to_dropbox(filename)
+    dropbox_ok = (not params[:save_to_dropbox]) || save_to_dropbox(filename, current_user)
 
     respond_to do |format|
       if @document.save and dropbox_ok

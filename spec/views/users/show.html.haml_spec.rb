@@ -19,20 +19,4 @@ describe "users/show.html.haml" do
 
     rendered.should match /bob@example.com/
   end
-
-  it "says the user is linked to Dropbox" do
-    @user.dropbox_user_id = 'dummy'
-
-    render
-
-    rendered.should match /<span class='linked_to_dropbox'>Yes<\/span>/
-  end
-
-  it "says the user is not linked to Dropbox" do
-    @user.dropbox_user_id = nil
-
-    render
-
-    rendered.should match /<span class='linked_to_dropbox'>No<\/span>/
-  end
 end

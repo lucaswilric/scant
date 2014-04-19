@@ -20,4 +20,19 @@ class DropboxController < ApplicationController
 
     redirect_to user
   end
+
+  def unauthorise
+    user = current_user
+
+    user.dropbox_access_token = nil
+    user.dropbox_user_id = nil
+
+    if user.save
+      flash[:notice] = "You have unlinked Scant from Dropbox."
+    else
+      flash[:error] = "Could not unlink your Scant account from Dropbox."
+    end  
+
+    redirect_to user
+  end
 end
