@@ -6,7 +6,7 @@ Scant::Application.routes.draw do
 
   get "users/show"
 
-  resources :documents
+  resources :documents, :except => :new
 
   match 'dropbox/auth' => 'dropbox#auth', :as => :dropbox_auth
   match 'dropbox/auth_finish' => 'dropbox#auth_finish', :as => :dropbox_auth_finish
