@@ -7,10 +7,6 @@ describe DocumentsController do
       get("/documents").should route_to("documents#index")
     end
 
-    it "routes to #new" do
-      get("/documents/new").should route_to("documents#new")
-    end
-
     it "routes to #show" do
       get("/documents/1").should route_to("documents#show", :id => "1")
     end

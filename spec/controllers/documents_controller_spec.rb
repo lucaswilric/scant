@@ -48,13 +48,6 @@ describe DocumentsController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new document as @document" do
-      get :new, {}
-      assigns(:document).should be_a_new(Document)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested document as @document" do
       document = Document.create! valid_attributes
