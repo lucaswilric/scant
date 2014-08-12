@@ -5,7 +5,7 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 
-secret_token = ENV['SECRET_TOKEN'] || \
-               YAML.load_file(File.join(Rails.root, 'config/secret_token.yml'))[Rails.env]['token']
+secret_token = ENV['SECRET_TOKEN']
+secret_token ||= YAML.load_file(File.join(Rails.root, 'config/secret_token.yml'))[Rails.env]['token']
 
 Scant::Application.config.secret_token = secret_token
