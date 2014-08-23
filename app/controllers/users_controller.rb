@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params)
+    @user = User.create(params[:user])
 
     respond_to do |format|
       if @user.save
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: "#{@user.name}'s details have been saved." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
