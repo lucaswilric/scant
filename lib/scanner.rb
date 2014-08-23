@@ -23,6 +23,10 @@ class Scanner
     mode: :color
   }
 
+  def self.supported_formats 
+    ['jpg', 'pdf', 'tiff']
+  end
+
   def initialize(name)
     @name = name
   end

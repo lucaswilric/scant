@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     @sidebar_document = Document.new
+
+    last_document = Document.where(user_id: current_user.id).order('id desc').limit(1).first
+    @last_format = last_document.file_name.split('.').last
+
+    @formats = Scanner.supported_formats
   end
 
   def check_user

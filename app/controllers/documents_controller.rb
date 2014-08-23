@@ -47,7 +47,11 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    filename = factory.scanner.scan(get_scan_name, {})
+    scan_options = {
+      format: (params[:scan_format] || :jpg).to_sym
+    }
+
+    filename = factory.scanner.scan(get_scan_name, scan_options)
 
     @document = Document.new(file_name: filename)
     @document.user = current_user

@@ -2,7 +2,18 @@
 - document = sidebar ? @sidebar_document : @document
 
 = simple_form_for document, :html => { :class => 'form-horizontal' } do |f|
-  = check_box_tag :save_to_dropbox
-  = label_tag :save_to_dropbox, 'Save to Dropbox'
+
+  %p
+    %div.btn-group.file-type{ :'data-toggle' => 'buttons-radio' }
+      - @formats.each do |format|
+        %button.btn{ id: format, type: 'button', :class => format == @last_format ? 'active' : '' }
+          = format.upcase
+      
+      %input{type: 'hidden', name: 'scan_format'}
+
+  %p
+    = check_box_tag :save_to_dropbox
+    = label_tag :save_to_dropbox, 'Save to Dropbox'
+
   .form-actions
     = f.button :submit, { :class => 'btn-primary', value: 'Scan now' }
