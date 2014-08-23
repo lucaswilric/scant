@@ -40,6 +40,8 @@ class UsersController < ApplicationController
 
     forbidden unless @user == current_user
 
+    @user.update_attributes params[:user]
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
