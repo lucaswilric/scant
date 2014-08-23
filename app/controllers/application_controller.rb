@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     @sidebar_document = Document.new
 
     last_document = Document.where(user_id: current_user.id).order('id desc').limit(1).first
-    @last_format = last_document.file_name.split('.').last
+    @last_format = (last_document.try(:file_name) || 'jpg').split('.').last
 
     @formats = Scanner.supported_formats
   end
