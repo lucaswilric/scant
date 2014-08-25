@@ -11,16 +11,8 @@ describe DocumentsController do
       get("/documents/1").should route_to("documents#show", :id => "1")
     end
 
-    it "routes to #edit" do
-      get("/documents/1/edit").should route_to("documents#edit", :id => "1")
-    end
-
     it "routes to #create" do
       post("/documents").should route_to("documents#create")
-    end
-
-    it "routes to #update" do
-      put("/documents/1").should route_to("documents#update", :id => "1")
     end
 
     it "routes to #destroy" do
