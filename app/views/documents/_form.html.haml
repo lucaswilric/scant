@@ -3,6 +3,7 @@
 
 = simple_form_for document, :html => { :class => 'form-horizontal' } do |f|
 
+  %p Scan my document in
   %p
     %div.btn-group.file-type{ :'data-toggle' => 'buttons-radio' }
       - @formats.each do |format|
@@ -11,6 +12,7 @@
       
       %input{type: 'hidden', name: 'scan_format'}
 
+  %p format, with
   %p
     %div.btn-group.scan-quality{ :'data-toggle' => 'buttons-radio' }
       - @qualities.each do |quality|
@@ -18,9 +20,12 @@
           = quality.titlecase
       
       %input{type: 'hidden', name: 'scan_quality'}
+
+  %p quality, and save it to
+
   %p
     = check_box_tag :save_to_dropbox
-    = label_tag :save_to_dropbox, 'Save to Dropbox'
+    = label_tag :save_to_dropbox, 'Dropbox'
 
   .form-actions
     = f.button :submit, { :class => 'btn-primary', value: 'Scan now' }
