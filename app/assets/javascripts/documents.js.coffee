@@ -2,11 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-fileTypeHandler = () ->
-  $('.file-type input').attr('value', $(this).attr('id'))
+addClickHandler = (cssClass) ->
+  fileTypeHandler = () ->
+    $('.'+cssClass+' input').attr('value', $(this).attr('id'))
+  
+  loadHandler = () ->
+    $('.'+cssClass+' button').on('click', fileTypeHandler)
+    $('.'+cssClass+' input').attr('value', $('.'+cssClass+' button.active').attr('id'))
+  
+  $(document).ready(loadHandler)
 
-loadHandler = () ->
-  $('.file-type button').on('click', fileTypeHandler)
-  $('.file-type input').attr('value', $('.file-type button.active').attr('id'))
-
-$(document).ready(loadHandler)
+addClickHandler('file-type')
+addClickHandler('scan-quality')

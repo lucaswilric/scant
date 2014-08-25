@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  attr_accessible :file_name, :user
+  attr_accessible :file_name, :user, :quality
 
   belongs_to :user
 

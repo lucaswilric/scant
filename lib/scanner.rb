@@ -12,9 +12,9 @@ class Scanner
   # - Greyscale
   # 
   # Detail levels:
-  # - Low: 100 pixels/inch
-  # - Medium: 200 pixels/inch
-  # - High: 400 pixels/inch
+  # - Rough: 100 pixels/inch
+  # - Good: 200 pixels/inch
+  # - Best: 400 pixels/inch
   #
 
   Defaults = {
@@ -25,6 +25,10 @@ class Scanner
 
   def self.supported_formats 
     ['jpg', 'pdf', 'tiff']
+  end
+
+  def self.supported_qualities
+    [:rough, :good, :best]
   end
 
   def initialize(name)
@@ -89,9 +93,9 @@ class Scanner
 
       resolution: 
         case options[:detail]
-          when :low then '100'
-          when :medium then '200'
-          when :high then '400'
+          when :rough then '100'
+          when :good then '200'
+          when :best then '400'
         end
     }
   end

@@ -48,12 +48,13 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     scan_options = {
-      format: (params[:scan_format] || :jpg).to_sym
+      format: (params[:scan_format] || :jpg).to_sym,
+      detail: (params[:scan_quality] || :rough).to_sym
     }
 
     filename = factory.scanner.scan(get_scan_name, scan_options)
 
-    @document = Document.new(file_name: filename)
+    @document = Document.new(file_name: filename, quality: params[:scan_quality])
     @document.user = current_user
 
     dropbox_ok = (not params[:save_to_dropbox]) || save_to_dropbox(filename, current_user)

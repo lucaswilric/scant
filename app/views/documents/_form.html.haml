@@ -12,6 +12,13 @@
       %input{type: 'hidden', name: 'scan_format'}
 
   %p
+    %div.btn-group.scan-quality{ :'data-toggle' => 'buttons-radio' }
+      - @qualities.each do |quality|
+        %button.btn{ id: quality, type: 'button', :class => quality == @last_quality ? 'active' : '' }
+          = quality.titlecase
+      
+      %input{type: 'hidden', name: 'scan_quality'}
+  %p
     = check_box_tag :save_to_dropbox
     = label_tag :save_to_dropbox, 'Save to Dropbox'
 
