@@ -23,9 +23,10 @@
 
   %p quality, and save it to
 
-  %p
-    = check_box_tag :save_to_dropbox
-    = label_tag :save_to_dropbox, 'Dropbox'
+  %ul.unstyled
+    %li
+      = check_box_tag :save_to_dropbox
+      = label_tag :save_to_dropbox, 'Dropbox'
 
   .form-actions
     = f.button :submit, { :class => 'btn-primary', value: 'Scan now' }
