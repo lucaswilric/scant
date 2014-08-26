@@ -56,6 +56,10 @@ GEM
     dropbox-sdk (1.6.3)
       json
     erubis (2.7.0)
+    evernote-thrift (1.25.1)
+    evernote_oauth (0.2.3)
+      evernote-thrift
+      oauth (>= 0.4.1)
     execjs (2.0.1)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
@@ -96,6 +100,7 @@ GEM
     mime-types (1.25)
     multi_json (1.7.8)
     multipart-post (1.2.0)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -202,6 +207,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   dropbox-sdk
+  evernote_oauth
   fuubar
   haml-rails
   jquery-rails

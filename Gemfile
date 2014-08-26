@@ -32,3 +32,4 @@ gem 'rspec-rails'
 gem 'fuubar'
 
 gem 'dropbox-sdk'
+gem 'evernote_oauth'
