@@ -48,14 +48,6 @@ describe DocumentsController do
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested document as @document" do
-      document = Document.create! valid_attributes
-      get :edit, {:id => document.to_param}
-      assigns(:document).should eq(document)
-    end
-  end
-
   describe "POST create" do
     let(:factory) { Factory.new }
     let(:scanner) { Scanner.new('test_scanner') }
@@ -98,50 +90,6 @@ describe DocumentsController do
         Document.any_instance.stub(:save).and_return(false)
         post :create, {:document => { "file_name" => "invalid value" }}
         response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested document" do
-        document = Document.create! valid_attributes
-        # Assuming there are no other documents in the database, this
-        # specifies that the Document created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Document.any_instance.should_receive(:update_attributes).with({ "file_name" => "MyString" })
-        put :update, {:id => document.to_param, :document => { "file_name" => "MyString" }}
-      end
-
-      it "assigns the requested document as @document" do
-        document = Document.create! valid_attributes
-        put :update, {:id => document.to_param, :document => post_attributes}
-        assigns(:document).should eq(document)
-      end
-
-      it "redirects to the document" do
-        document = Document.create! valid_attributes
-        put :update, {:id => document.to_param, :document => post_attributes}
-        response.should redirect_to(document)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the document as @document" do
-        document = Document.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Document.any_instance.stub(:save).and_return(false)
-        put :update, {:id => document.to_param, :document => { "file_name" => "invalid value" }}
-        assigns(:document).should eq(document)
-      end
-
-      it "re-renders the 'edit' template" do
-        document = Document.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Document.any_instance.stub(:save).and_return(false)
-        put :update, {:id => document.to_param, :document => { "file_name" => "invalid value" }}
-        response.should render_template("edit")
       end
     end
   end

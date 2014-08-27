@@ -1,25 +1,42 @@
 require 'spec_helper'
 
+class FakeRequestToken
+  def authorize_url
+    "http://example.com/"
+  end
+end
+
+class FakeEvernoteClient
+  def request_token(opts)
+    FakeRequestToken.new
+  end
+end
+
+class Factory
+  def evernote_client(auth_token)
+    FakeEvernoteClient.new
+  end
+end
+
 describe EvernoteController do
 
-  describe "GET 'request_token'" do
-    it "returns http success" do
-      get 'request_token'
-      response.should be_success
-    end
+  let(:bob) { User.find_or_create_by_email(name: 'Bob', email: 'bob@example.com', password: 'abcd1234') }
+
+  before :each do
+    sign_in :user, bob
   end
 
   describe "GET 'authorize'" do
-    it "returns http success" do
+    it "returns http redirect" do
       get 'authorize'
-      response.should be_success
+      response.status.should be(302)
     end
   end
 
   describe "GET 'callback'" do
-    it "returns http success" do
+    it "returns http redirect" do
       get 'callback'
-      response.should be_success
+      response.status.should be(302)
     end
   end
 

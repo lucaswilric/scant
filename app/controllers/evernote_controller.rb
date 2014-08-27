@@ -16,8 +16,7 @@ class EvernoteController < ApplicationController
 
   def callback
     unless params['oauth_verifier'] || session[:request_token]
-      @last_error = "Content owner did not authorize the temporary credentials"
-      halt erb :error
+      raise "Content owner did not authorize the temporary credentials"
     end
 
     oauth_verifier = params['oauth_verifier']
@@ -26,8 +25,7 @@ class EvernoteController < ApplicationController
       current_user.evernote_access_token = session[:request_token].get_access_token(:oauth_verifier => oauth_verifier)
       redirect_to user_url(current_user)
     rescue => e
-      @last_error = 'Error extracting access token'
-      erb :error
+      raise 'Error extracting access token'
     end
   end
 end

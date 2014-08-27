@@ -7,7 +7,7 @@ require 'evernote_oauth'
 
 module EvernoteHelper
   def client
-    @client ||= EvernoteOAuth::Client.new(token: auth_token, consumer_key: Settings.evernote_oauth_key, consumer_secret: Settings.evernote_oauth_secret, sandbox: Settings.evernote_sandbox)
+    @client ||= factory.evernote_client(auth_token)
   end
 
   def auth_token
