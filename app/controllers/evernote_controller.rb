@@ -23,6 +23,13 @@ class EvernoteController < ApplicationController
 
     begin
       current_user.evernote_access_token = session[:request_token].get_access_token(:oauth_verifier => oauth_verifier)
+      
+      if current_user.save
+        flash[:notice] = "You have linked Scant to Evernote"
+      else
+        flash[:error] = "Could not link your Scant account to Evernote"
+      end
+
       redirect_to user_url(current_user)
     rescue => e
       raise 'Error extracting access token'
@@ -35,9 +42,9 @@ class EvernoteController < ApplicationController
     user.evernote_access_token = nil
 
     if user.save
-      flash[:notice] = "You have unlinked Scant from Dropbox."
+      flash[:notice] = "You have unlinked Scant from Evernote."
     else
-      flash[:error] = "Could not unlink your Scant account from Dropbox."
+      flash[:error] = "Could not unlink your Scant account from Evernote."
     end  
 
     redirect_to user
