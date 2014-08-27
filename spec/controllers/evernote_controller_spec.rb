@@ -26,9 +26,9 @@ describe EvernoteController do
     sign_in :user, bob
   end
 
-  describe "GET 'authorize'" do
+  describe "GET 'auth'" do
     it "returns http redirect" do
-      get 'authorize'
+      get 'auth'
       response.status.should be(302)
     end
   end

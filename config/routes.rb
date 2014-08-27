@@ -1,10 +1,10 @@
 Scant::Application.routes.draw do
 
-  get "evernote/request_token"
-
-  get "evernote/authorize"
+  get "evernote/auth"
 
   get "evernote/callback"
+
+  get "evernote/unauthorise"
 
   get "users/index"
 

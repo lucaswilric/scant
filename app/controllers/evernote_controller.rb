@@ -1,8 +1,8 @@
 class EvernoteController < ApplicationController
   include EvernoteHelper
 
-  def authorize
-    callback_url = request.url.chomp("authorize").concat("callback")
+  def auth
+    callback_url = request.url.chomp("auth").concat("callback")
     session[:request_token] = client.request_token(:oauth_callback => callback_url)
 
     if session[:request_token]
@@ -16,7 +16,7 @@ class EvernoteController < ApplicationController
 
   def callback
     unless params['oauth_verifier'] || session[:request_token]
-      raise "Content owner did not authorize the temporary credentials"
+      raise "Content owner did not authorise the temporary credentials"
     end
 
     oauth_verifier = params['oauth_verifier']
@@ -27,5 +27,19 @@ class EvernoteController < ApplicationController
     rescue => e
       raise 'Error extracting access token'
     end
+  end
+
+  def unauthorise
+    user = current_user
+
+    user.evernote_access_token = nil
+
+    if user.save
+      flash[:notice] = "You have unlinked Scant from Dropbox."
+    else
+      flash[:error] = "Could not unlink your Scant account from Dropbox."
+    end  
+
+    redirect_to user
   end
 end

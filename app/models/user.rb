@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
   def dropbox?
     dropbox_user_id.present?
   end
+
+  def evernote?
+    evernote_access_token.present?
+  end
 end
