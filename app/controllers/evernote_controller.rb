@@ -20,19 +20,20 @@ class EvernoteController < ApplicationController
     end
 
     oauth_verifier = params['oauth_verifier']
+    user = current_user
 
     begin
-      current_user.evernote_access_token = session[:request_token].get_access_token(:oauth_verifier => oauth_verifier)
+      user.evernote_access_token = session[:request_token].get_access_token(:oauth_verifier => oauth_verifier).token
       
-      if current_user.save
+      if user.save
         flash[:notice] = "You have linked Scant to Evernote"
       else
         flash[:error] = "Could not link your Scant account to Evernote"
       end
 
-      redirect_to user_url(current_user)
-    rescue => e
-      raise 'Error extracting access token'
+      redirect_to user_url(user)
+    #rescue => e
+    #  raise 'Error extracting access token'
     end
   end
 
