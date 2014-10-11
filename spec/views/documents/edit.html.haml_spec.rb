@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "documents/edit" do
   before(:each) do
     @document = assign(:document, stub_model(Document))
+    assign(:formats, ['pdf', 'jpeg'])
+    assign(:qualities, ['l', 'm', 'h'])
   end
 
   it "renders the edit document form" do
