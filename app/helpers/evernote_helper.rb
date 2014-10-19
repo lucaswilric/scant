@@ -38,12 +38,20 @@ module EvernoteHelper
     end
   end
 
-  def save_to_evernote(filename)
-    mimetype = 'application/pdf'
+  def mimetype_from_filetype(filetype)
+    {
+      'pdf' => 'application/pdf',
+      'jpg' => 'image/jpeg',
+      'tiff' => 'image/tiff'
+    }[filetype.downcase]
+  end
 
+  def save_to_evernote(filename)
     template = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><p>{content}</p><en-media type="{mimetype}" hash="{hash}" /></en-note>'
 
     raise "Not authorised." unless auth_token 
+
+    mimetype = mimetype_from_filetype(filename.split('.').last)
 
     content = File.open(filename, "rb") { |io| io.read }
 
