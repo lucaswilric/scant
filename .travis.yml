@@ -7,5 +7,7 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database scant_test;' -U postgres
 
-script: "RAILS_ENV=test DOC_ROOT=tmp/documents bundle exec rake db:migrate db:seed --trace && bundle exec rspec spec/"
+script:
+  - export RAILS_ENV=test ; export DOC_ROOT=tmp/documents 
+  - "bundle exec rake db:migrate db:seed --trace && bundle exec rspec spec/"
 
