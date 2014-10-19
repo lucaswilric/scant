@@ -1,0 +1,9 @@
+scanner_name: test_scanner
+doc_root: tmp/documents
+
+dropbox_key: 
+dropbox_secret: 
+
+evernote_oauth_key: 
+evernote_oauth_secret: 
+evernote_sandbox: true

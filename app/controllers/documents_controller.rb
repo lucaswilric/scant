@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   include DocumentsHelper
   include DropboxHelper
+  include EvernoteHelper
 
   before_filter :check_user
 
@@ -53,6 +54,7 @@ class DocumentsController < ApplicationController
     @document.user = current_user
 
     dropbox_ok = (not params[:save_to_dropbox]) || save_to_dropbox(filename, current_user)
+    evernote_ok = (not params[:save_to_evernote]) || save_to_evernote(filename)
 
     respond_to do |format|
       if @document.save and dropbox_ok

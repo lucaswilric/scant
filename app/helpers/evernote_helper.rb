@@ -38,34 +38,45 @@ module EvernoteHelper
     end
   end
 
-  def save_to_evernote(document)
-    template = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><p>{content}</p><en-media type="application/pdf" hash="{hash}" /></en-note>'
+  def mimetype_from_filetype(filetype)
+    {
+      'pdf' => 'application/pdf',
+      'jpg' => 'image/jpeg',
+      'tiff' => 'image/tiff'
+    }[filetype.downcase]
+  end
+
+  def save_to_evernote(filename)
+    template = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><p>{content}</p><en-media type="{mimetype}" hash="{hash}" /></en-note>'
 
     raise "Not authorised." unless auth_token 
 
-    filename = '/Users/lucas/Documents/Android intro.pdf'
-    pdf = File.open(filename, "rb") { |io| io.read }
+    mimetype = mimetype_from_filetype(filename.split('.').last)
+
+    content = File.open(filename, "rb") { |io| io.read }
 
     hashFunc = Digest::MD5.new
-    hashHex = hashFunc.hexdigest(pdf)
+    hashHex = hashFunc.hexdigest(content)
 
     data = Evernote::EDAM::Type::Data.new()
-    data.size = pdf.size
+    data.size = content.size
     data.bodyHash = hashHex
-    data.body = pdf;
+    data.body = content;
 
     resource = Evernote::EDAM::Type::Resource.new()
-    resource.mime = "application/pdf"
+    resource.mime = mimetype
     resource.data = data;
     resource.attributes = Evernote::EDAM::Type::ResourceAttributes.new()
     resource.attributes.fileName = filename.split('/').last
 
     note = Evernote::EDAM::Type::Note.new(
-      title: "Yep. It's a note.", 
-      content: template.gsub('{content}', params[:content]).gsub('{hash}', hashHex), active: true
+      title: "Note from Scant", 
+      content: template.gsub('{content}', '').gsub('{hash}', hashHex).gsub('{mimetype}', mimetype), active: true
     )
     note.resources = [ resource ]
 
     note_store.createNote(auth_token, note)
+
+    true
   end
 end

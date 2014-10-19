@@ -27,6 +27,9 @@
     %li
       = check_box_tag :save_to_dropbox
       = label_tag :save_to_dropbox, 'Dropbox'
+    %li
+      = check_box_tag :save_to_evernote
+      = label_tag :save_to_evernote, 'Evernote'
 
   .form-actions
     = f.button :submit, { :class => 'btn-primary', value: 'Scan now' }
