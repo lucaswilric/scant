@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "documents/show" do
   before(:each) do
     @document = assign(:document, stub_model(Document,
-      :file_name => "File Name"
+      :file_name => "File Name",
+      :user => stub_model(User, :name => "Jane Example", :email => "jane@example.com")
     ))
   end
 
