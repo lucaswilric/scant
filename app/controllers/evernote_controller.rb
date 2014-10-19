@@ -1,6 +1,8 @@
 class EvernoteController < ApplicationController
   include EvernoteHelper
 
+  #before_filter :check_user
+
   def auth
     callback_url = request.url.chomp("auth").concat("callback")
     session[:request_token] = client.request_token(:oauth_callback => callback_url)
@@ -22,19 +24,15 @@ class EvernoteController < ApplicationController
     oauth_verifier = params['oauth_verifier']
     user = current_user
 
-    begin
-      user.evernote_access_token = session[:request_token].get_access_token(:oauth_verifier => oauth_verifier).token
-      
-      if user.save
-        flash[:notice] = "You have linked Scant to Evernote"
-      else
-        flash[:error] = "Could not link your Scant account to Evernote"
-      end
-
-      redirect_to user_url(user)
-    #rescue => e
-    #  raise 'Error extracting access token'
+    user.evernote_access_token = session[:request_token].get_access_token(:oauth_verifier => oauth_verifier).token
+    
+    if user.save
+      flash[:notice] = "You have linked Scant to Evernote"
+    else
+      flash[:error] = "Could not link your Scant account to Evernote"
     end
+
+    redirect_to user_url(user)
   end
 
   def unauthorise

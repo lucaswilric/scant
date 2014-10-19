@@ -1,8 +1,18 @@
 require 'spec_helper'
 
+class FakeAccessToken
+  def token
+    'fake access request_token'
+  end
+end
+
 class FakeRequestToken
   def authorize_url
     "http://example.com/"
+  end
+
+  def get_access_token(options)
+    FakeAccessToken.new
   end
 end
 
@@ -35,6 +45,7 @@ describe EvernoteController do
 
   describe "GET 'callback'" do
     it "returns http redirect" do
+      session[:request_token] = FakeRequestToken.new
       get 'callback'
       response.status.should be(302)
     end
