@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140824223912) do
+ActiveRecord::Schema.define(:version => 20140826084321) do
 
   create_table "documents", :force => true do |t|
     t.string   "file_name"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20140824223912) do
     t.string   "last_sign_in_ip"
     t.string   "dropbox_access_token"
     t.string   "dropbox_user_id"
+    t.string   "evernote_access_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

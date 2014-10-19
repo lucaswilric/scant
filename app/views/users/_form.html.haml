@@ -9,6 +9,16 @@
       - else
         Not linked to Dropbox
         = link_to 'Link now', dropbox_auth_path, :class => 'btn btn-mini'
+
+  %p
+    %label
+      - if @user.evernote?
+        Linked to Evernote
+        = link_to 'Unlink', evernote_unauthorise_path, :class => 'btn btn-mini btn-danger'
+      - else
+        Not linked to Evernote
+        = link_to 'Link now', evernote_auth_path, :class => 'btn btn-mini'
+
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), users_path, :class => 'btn'

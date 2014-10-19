@@ -1,5 +1,11 @@
 Scant::Application.routes.draw do
 
+  get "evernote/auth"
+
+  get "evernote/callback"
+
+  get "evernote/unauthorise"
+
   get "users/index"
 
   get "users/edit"
